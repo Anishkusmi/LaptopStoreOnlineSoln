@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LaptopStoreOnline.Models.Laptop>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@if(TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="text-center text-primary">Book Images</h1>
+
+            <form class="d-flex" asp-action="Index" asp-controller="Laptop">
+                <input name="searchString1" class="form-control m-1" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-dark" type="submit">Search by Name</button>
+            </form>
+            
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="text-center bg-dark text-light">
+                        <th>Id</th>
+                        <th>Name</th>  @* Brand *@
+                        <th>Description</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @if( Model != null)
+                    {
+                        @foreach (var d in Model)
+                        {
+                            var imagePath = "/Content/Laptop/" + d.Path;
+                            <tr>
+                                <td>@d.Id</td>
+                                <td>@d.Brand</td>
+                                <td>@d.Description</td>
+                                <td>@d.Price</td>
+                                <td>
+                                    <img src="@imagePath" height="100px;" width="100px;" />
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" asp-action="Details" asp-controller="Laptop" asp-route-id="@d.Id">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/laptop.js"></script>
+}

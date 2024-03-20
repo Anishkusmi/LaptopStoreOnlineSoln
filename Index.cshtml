@@ -1,0 +1,64 @@
+﻿
+@model IEnumerable<LaptopStoreOnline.Models.Laptop>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="text-center text-primary">Laptop Images</h1>
+
+             <form class="d-flex" asp-action="Index" asp-controller="Laptop">
+                <input name="searchString" class="form-control m-1" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-dark" type="submit">Search by Name</button>
+            </form> 
+
+            <a class="btn btn-sm btn-primary float-end p-1 m-1" asp-action="AddLaptop" asp-controller="Laptop">
+                Add Laptop
+            </a>
+            
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="text-center bg-dark text-light">
+                        <th>Id</th>
+                        <th>Brand</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @if( Model != null)
+                    {
+                        @foreach (var d in Model)
+                        {
+                            var imagePath = "/Content/Laptop/" + d.Path;
+                            <tr>
+                                <td>@d.Id</td>
+                                <td>@d.Brand</td>
+                                <td>@d.Description</td>
+                                <td>@d.Price</td>
+                                <td>
+                                    <img src="@imagePath" height="100px;" width="100px;" />
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-controller="Laptop" asp-route-id="@d.Id">Edit</a>
+                                    <a class="btn btn-sm btn-danger" onclick="return confirm("Are you sure, You want to delete")" asp-action="Delete" asp-controller="Laptop" asp-route-id="@d.Id">Delete</a>
+                                    <a class="btn btn-sm btn-warning" asp-action="Details" asp-controller="Laptop" asp-route-id="@d.Id">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/laptop.js"></script>
+}

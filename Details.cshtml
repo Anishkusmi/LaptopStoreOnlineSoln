@@ -1,0 +1,39 @@
+﻿@model LaptopStoreOnline.Models.Laptop
+@{
+    ViewData["Title"] = "Details";
+    //var imagePath = "/Content/Laptop" + Model.Path;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center text-info">Laptop Details</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 text-center p4">
+                            <span>Name: <i><b>@Model.Brand</b></i></span>
+                        </div>
+                        <div class="col-6 text-center p4">
+                            <span>Name: <i><b>@Model.Price</b></i></span>
+                        </div>
+                        
+                        <div class="col-6 text-center p4">
+                            <span class="m-2">Id: <i><b>@Model.Id</b></i></span>
+                            <img src="/Content/Laptop/@Model.Path" style="width:100px;height:100px;border:1px solid red;
+                                 border-radius:5px; padding:10px; alt="Laptop image" />
+                        </div>
+                     </div>
+                     <div class="m-2">
+                        <textarea class="form-control" cols="10" rows="2">@Model.Description</textarea>
+                     </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-sm btn-warning p-2 m-2" asp-action="Index" asp-controller="Laptop">Back to List </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
