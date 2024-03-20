@@ -1,0 +1,31 @@
+﻿@model IEnumerable<LaptopStoreOnline.Models.Laptop>
+
+@{
+    ViewData["Title"] = "Book Index";
+}
+<form class="d-flex" asp-action="IndexUser" asp-controller="Laptop">
+    <input name="searchString1" class="form-control m-1" type="search" placeholder="Search" aria-label="Search" />
+    <button class="btn btn-dark" type="submit">Search by Name</button>
+</form>
+<div class="row pb-3">
+    @foreach(var d in Model)
+    {
+       var imagePath = "/Content/Laptop/" + d.Path;
+       <div class="col-lg-3 col-md-6">
+           <div class="row p-2">
+               <div class="col-12 p-2" style="border:1px solid black; border-radius: 5px">
+                   <div class="card">
+                         <img src="@imagePath" class="card-imgtop-0 rounded"  />  
+                         <div class="pl-1">
+                            <p class="card-title h3 text-primary">@d.Brand</p>  
+                            <p class="card-title h4 text-second">@d.Price</p>
+                            <p>
+                                <a class="btn btn-sm btn-warning" asp-action="Details" asp-controller="Laptop" asp-route-id="@d.Id">Details</a>
+                            </p>
+                        </div>
+                    </div>
+               </div> 
+           </div>
+       </div> 
+    }
+</div>
