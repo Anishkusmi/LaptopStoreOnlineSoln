@@ -1,0 +1,45 @@
+﻿@using LaptopStoreOnline.ViewModels;
+@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<div class="row d-flex align-items-center justify-content-center">
+    <div class="col-md-3 card p-3">
+        <h2 class="text-center text-info">Login</h2>
+        <form asp-action="Login" method="post">
+            <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-1">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" placeholder="Enter Email" />
+                <span asp-asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="mb-1">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-1 form-check">
+                <label class="form-check-label">
+                    <input asp-for="RemeberMe" class="form-check-input" /> @Html.DisplayNameFor(a => a.RemeberMe)
+                </label>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <a asp-action="Register" class="btn-info btn-sm text-decoration-none float-start">Don't have account?</a>
+                </div>
+                <div class="col-6">
+                    <input type="submit" value="Login" class="btn btn-primary btn-sm float-end" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
